@@ -1,0 +1,7 @@
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.exe
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.pdb
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.Client_Form.resources
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.Properties.Resources.resources
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csproj.GenerateResource.Cache
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.exe
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.pdb

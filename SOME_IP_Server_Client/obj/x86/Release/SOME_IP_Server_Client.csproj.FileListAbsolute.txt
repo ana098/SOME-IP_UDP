@@ -1,0 +1,3 @@
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Release\SOME_IP_Server_Client.Client_Form.resources
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Release\SOME_IP_Server_Client.Properties.Resources.resources
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Release\SOME_IP_Server_Client.csproj.GenerateResource.Cache
