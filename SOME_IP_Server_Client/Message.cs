@@ -11,10 +11,9 @@ namespace SOME_IP_Server_Client
         public byte[] Payload;
         List<Signal> Signals = new List<Signal>();
    
-        class Signal
+        public class Signal
         {
             uint StartByte, Length;
-        
         }
     }
 }

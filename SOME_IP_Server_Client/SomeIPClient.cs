@@ -9,14 +9,21 @@ namespace SOME_IP_Server_Client
 {
     class SomeIPClient
     {
-        string IPadress = "127.0.0.1";
         int Port = 1200;
+        UdpClient Client; 
+        string IPadress = "127.0.0.1";
 
-        public void Connect(byte[] SOMEIP_Message)
+        public byte[] Connect()
         {
-            UdpClient Client = new UdpClient(Port);
+            Client = new UdpClient(Port);
             IPEndPoint EndPoint = new IPEndPoint(IPAddress.Parse(IPadress), Port);
             Client.Connect(EndPoint);
+            byte[] bytes = Client.Receive(ref EndPoint);
+            return bytes;
+        }
+        //koristiti socket??
+        public void Send(byte[] SOMEIP_Message)
+        {
             Client.Send(SOMEIP_Message, SOMEIP_Message.Length);
         }
     }

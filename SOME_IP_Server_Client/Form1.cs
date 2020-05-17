@@ -11,6 +11,8 @@ namespace SOME_IP_Server_Client
 {
     public partial class Client_Form : Form
     {
+        byte[] polje = Encoding.ASCII.GetBytes("Tekst za test");
+        
         public Client_Form()
         {
             InitializeComponent();
@@ -18,8 +20,10 @@ namespace SOME_IP_Server_Client
 
         private void Client_Form_Load(object sender, EventArgs e)
         {
-            SomeIPMessage mesage = new SomeIPMessage();
-            mesage.MessageID = 4027558570;
+            SomeIPMessage message = new SomeIPMessage(polje);
+
+            //mesage.MessageID = 4027558570;
+            
             
         }
 
