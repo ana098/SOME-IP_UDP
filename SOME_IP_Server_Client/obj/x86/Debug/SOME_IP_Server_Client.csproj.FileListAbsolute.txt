@@ -5,3 +5,4 @@ D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\
 D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csproj.GenerateResource.Cache
 D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.exe
 D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.pdb
+D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csprojResolveAssemblyReference.cache

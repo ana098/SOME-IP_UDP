@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="frmSOMEIP.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmSOMEIP.Designer.cs">
+      <DependentUpon>frmSOMEIP.cs</DependentUpon>
     </Compile>
     <Compile Include="Log.cs" />
     <Compile Include="Message.cs" />
@@ -59,8 +59,8 @@
     <Compile Include="SomeIPClient.cs" />
     <Compile Include="SomeIPMessage.cs" />
     <Compile Include="SomeIPServiceDiscoveryMessage.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmSOMEIP.resx">
+      <DependentUpon>frmSOMEIP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
