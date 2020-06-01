@@ -8,6 +8,7 @@ namespace SOME_IP_Server_Client
 {
     public class SomeIPMessage : Message
     {
+        byte[] tempSetter;
         uint Length;    //122;    //32
         ushort ServiceID, MethodID, ClientID, SessionID;  //16
         byte ProtocolVersion, InterfaceVersion, MessageType, ReturnCode;  //8
@@ -51,28 +52,9 @@ namespace SOME_IP_Server_Client
             }
             set 
             {
-                ServiceID = (ushort)(((1 << 16) -1) & (value >> (32 - 0)));
-                MethodID = (ushort)(((1 << 16) - 1) & (value >> (16 - 0)));
-                // ServiceID = (ushort) (value & 0xFFFF)
-                // MethodID = (ushort) (value >> 16)
-                // ServiceID = (ushort)(value & 0xFFFF)
-                // MethodID = (ushort) (value >> 16)
-
-                /*
-                0x3225FEDC
+                ServiceID = (ushort)value;  
+                MethodID = (ushort)(value >> 16);          
                 
-                & 0x0000FFFF
-                0x0000FEDC > ushort 0xFEDC
-                 
-                0x3225FEDC  [>>4] ->  0x03225FED
-                            [>>4] ->  0x003225FE
-
-                [>> 16] -> 0x00003225
-
-                0x3225
-                0x00003225
-                0x32250000 + ServiceID
-                 */
             }
         }
 
@@ -90,39 +72,41 @@ namespace SOME_IP_Server_Client
                    .Concat(BitConverter.GetBytes(ReturnCode))).ToArray();
                 
             }
-            private set
+            //private    //komentirano radi testiranja
+              set 
             {
-                for (byte i = 0; i < 32; i++)
+                //koji endian?
+                //Buffer.BlockCopy(value, 0, BitConverter.GetBytes(MessageID), 0, 4);
+
+                if (tempSetter != null && tempSetter.Length == 16)
                 {
-                    MessageID = value[i]; 
+
+                    byte[] temp = new byte[4];
+
+                    Array.Copy(tempSetter, 0, temp, 0, 4);      //uzima iste vrijednosti???????
+                    MessageID = BitConverter.ToUInt32(temp, 0);
+
+                    Array.Copy(tempSetter, 3, temp, 0, 4);
+                    Length = BitConverter.ToUInt32(temp, 0);
+
+                    Array.Copy(tempSetter, 7, temp, 0, 4);
+                    RequestID = BitConverter.ToUInt32(temp, 0);
+
+                    Array.Copy(tempSetter, 11, temp, 0, 1);
+                    ProtocolVersion = temp[0];
+
+                    Array.Copy(tempSetter, 12, temp, 0, 1);
+                    InterfaceVersion = temp[0];
+
+                    Array.Copy(tempSetter, 13, temp, 0, 1);
+                    MessageType = temp[0];
+
+                    Array.Copy(tempSetter, 14, temp, 0, 1);
+                    ReturnCode = temp[0];
                 }
-                for (byte i = 32; i < 64; i++)
-                {
-                    Length=value[i];
+                else
+                { //što? try catch bolje?
                 }
-                for(byte i = 64; i < 96; i++)
-                {
-                    RequestID = value[i];
-                }
-                for (byte i = 96; i < 104; i++)
-                {
-                    ProtocolVersion = value[i];
-                }
-                for (byte i = 104; i < 112; i++)
-                {
-                    InterfaceVersion = value[i];
-                }
-                for (byte i = 112; i < 120; i++)
-                {
-                    MessageType = value[i];
-                }
-                for (byte i = 120; i < 128; i++)
-                {
-                    ReturnCode = value[i];
-                }
-               // ReturnCode =value.Take(8);
-                //var first=array.take(koliko uzima).ToArray();
-                //var second=array.Skip(koliko preskace).ToArray();
             }
         }
 
@@ -134,8 +118,8 @@ namespace SOME_IP_Server_Client
             }
             set 
             {
-                ClientID = (ushort)(((1 << 16) - 1) & (value >> (32 - 0)));
-                SessionID = (ushort)(((1 << 16) - 1) & (value >> (16 - 0)));
+                ClientID = (ushort)value;
+                SessionID = (ushort)(value >> 16);
             }
         }
 
@@ -147,37 +131,37 @@ namespace SOME_IP_Server_Client
             }
             set 
             {
-                DissectFullPayload(value);      //je li ovo ok?????
+                DissectFullPayload(value);
             }
         }
 
         public SomeIPMessage(uint Mess_ID, uint Req_ID,byte Mess_Type, byte Ret_Code)
         { 
+            //nema length??
             MessageID = Mess_ID;
             RequestID = Req_ID;
             MessageType = Mess_Type;
             ReturnCode = Ret_Code;
-            ProtocolVersion = 1;    //ovo je drugi konstruktor?
+            ProtocolVersion = 1; 
             InterfaceVersion = 1;
         }
 
-        public SomeIPMessage(byte[] Full_Message)
+        public SomeIPMessage(byte[] Full_MessagePayload)
         {
-            DissectFullPayload(Full_Message);
+            DissectFullPayload(Full_MessagePayload);
         }
 
-        public void DissectFullPayload(byte[] Full_Message)
+        public void DissectFullPayload(byte[] Full_MessagePayload)
         {
-            for (byte i = 0; i < 128; i++)
-            {
-                SomeIPHeader[i] = Full_Message[i];
-            }
-            for (byte i = 128; i < Full_Message.Length; i++)
-            {
-                Payload[i] = Full_Message[i];
-            }
-           
+            tempSetter = new byte[16];
+            Array.Copy(Full_MessagePayload, tempSetter, 16);
+            SomeIPHeader = new byte[16];
+            Payload = new byte[Full_MessagePayload.Length - 16];
+            Array.Copy(Full_MessagePayload, 16, Payload, 0, Payload.Length);
         }
+        //da izbjegnem error, obrisati poslije
+       public SomeIPMessage()
+        { }
 
     }
 }
