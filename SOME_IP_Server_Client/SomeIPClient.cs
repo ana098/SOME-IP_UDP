@@ -21,6 +21,7 @@ namespace SOME_IP_Server_Client
         {
             Client.Connect(EndPoint);
         }
+<<<<<<< HEAD
         private async Task<byte[]> Receive()
         {
             while (true)
@@ -28,6 +29,18 @@ namespace SOME_IP_Server_Client
                 var ReceiveResults = await Client.ReceiveAsync();
                 return Encoding.ASCII.GetBytes(ReceiveResults.Buffer.ToString()); //može li ovo ovako, nesto tu ne stima? ili može biti void?
                 //var s = string.Format("[{0}] {1}", receivedResults.RemoteEndPoint, System.Text.Encoding.ASCII.GetString(receivedResults.Buffer));
+=======
+
+        //1.asinkrono pokretanje taskova, unutar taska:
+        //2. Petlja koja se konstantno vrti
+        private async Task<byte[]> Receive()
+        {
+            //3.udpReceiveResult --asinkrono primanje podataka od klijenta
+            //receiveAsinc i await
+            while (true)
+            {
+               // return await Client.BeginReceive(;
+>>>>>>> d41da02e2d633541e51bd6440a1c3f3688d83793
             }
         }
 
