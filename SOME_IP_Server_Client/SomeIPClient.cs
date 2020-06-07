@@ -10,37 +10,30 @@ using System.Threading.Tasks;
 
 namespace SOME_IP_Server_Client
 {
-    class SomeIPClient
+    class SomeIPClient 
     {
-        int port = 1200;
-        UdpClient Client = new UdpClient(1200); 
-        string IPadress = "127.0.0.1";
+        static int port = 1200;
+        UdpClient Client = new UdpClient(port); 
         IPEndPoint EndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1200);
+        byte[] ReceiveData;
 
         public void Connect()
         {
             Client.Connect(EndPoint);
         }
-<<<<<<< HEAD
-        private async Task<byte[]> Receive()
+        private async Task Receive()
         {
             while (true)
             {
-                var ReceiveResults = await Client.ReceiveAsync();
-                return Encoding.ASCII.GetBytes(ReceiveResults.Buffer.ToString()); //može li ovo ovako, nesto tu ne stima? ili može biti void?
-                //var s = string.Format("[{0}] {1}", receivedResults.RemoteEndPoint, System.Text.Encoding.ASCII.GetString(receivedResults.Buffer));
-=======
+                var ReceiveResults = await Client.ReceiveAsync(); //raise event
 
-        //1.asinkrono pokretanje taskova, unutar taska:
-        //2. Petlja koja se konstantno vrti
-        private async Task<byte[]> Receive()
-        {
-            //3.udpReceiveResult --asinkrono primanje podataka od klijenta
-            //receiveAsinc i await
-            while (true)
-            {
-               // return await Client.BeginReceive(;
->>>>>>> d41da02e2d633541e51bd6440a1c3f3688d83793
+
+                //event handler, delegate
+                // if (ReceiveResults != null) { RaiseEventMsg(ReceiveResults.Buffer) }
+                if (ReceiveResults != null)
+                {
+                    OnDataReceived(Encoding.ASCII.GetBytes(ReceiveResults.Buffer.ToString()));
+                }
             }
         }
 
@@ -48,6 +41,16 @@ namespace SOME_IP_Server_Client
         {
             Client.Send(SOMEIP_Message, SOMEIP_Message.Length);
         }
+
+        public delegate void SomeIPClientEventHandler(object sender, byte[] e);
+        public event SomeIPClientEventHandler ReceiveResultsEvent;
+
+        private void OnDataReceived(byte[] args)
+        {
+            if (ReceiveResultsEvent != null)
+            {
+                ReceiveResultsEvent(this, args);
+            }
+        }
     }
 }
-//sjetiti se pitati za 2 objekta

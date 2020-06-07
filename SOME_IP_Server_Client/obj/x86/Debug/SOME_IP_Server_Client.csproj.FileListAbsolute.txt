@@ -6,7 +6,6 @@ D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\
 D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.exe
 D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.pdb
 D:\Ana\faks\Diplomski\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csprojResolveAssemblyReference.cache
-<<<<<<< HEAD
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.exe.config
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.exe
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.pdb
@@ -17,5 +16,3 @@ C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csproj.CoreCompileInputs.cache
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.exe
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.pdb
-=======
->>>>>>> d41da02e2d633541e51bd6440a1c3f3688d83793

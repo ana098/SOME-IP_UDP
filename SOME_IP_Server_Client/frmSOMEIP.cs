@@ -17,21 +17,19 @@ namespace SOME_IP_Server_Client
         public Client_Form()
         {
             InitializeComponent();
+            SomeIPClient RaisingEvent = new SomeIPClient();
             SomeIPMessage message = new SomeIPMessage();
             SomeIPServiceDiscoveryMessage.ServiceDiscoveryEntry DS_message = new SomeIPServiceDiscoveryMessage.ServiceDiscoveryEntry();
-<<<<<<< HEAD
             message.SomeIPHeader = new byte[] { 0x01, 0x02, 0xFF, 0x00, 0x05, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0xAA, 0xBB, 0xCC, 0xDD };
-=======
-            message.SomeIPHeader = new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0xAA, 0xBB, 0xCC, 0xDD };
->>>>>>> d41da02e2d633541e51bd6440a1c3f3688d83793
             DS_message.Entries_Array = new byte[] { 0xFF, 0xFF, 0xFF, 0xFA, 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0xAA, 0xBB, 0xCC, 0xDD };
             SomeIPServiceDiscoveryMessage sd = new SomeIPServiceDiscoveryMessage(test);
-           
+
+            //SomeIPClient.SomeIPClientEventHandler += message.DissectFullPayload;         ERROR
         }
 
         private void Client_Form_Load(object sender, EventArgs e)
         {
-
+            
             //mesage.MessageID = 4027558570;
             
             

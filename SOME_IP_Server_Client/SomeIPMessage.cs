@@ -75,8 +75,6 @@ namespace SOME_IP_Server_Client
             //private    //komentirano radi testiranja
               set 
             {
-<<<<<<< HEAD
-                //koji endian?
                 //Buffer.BlockCopy(value, 0, BitConverter.GetBytes(MessageID), 0, 4);
 
                 if (tempSetter != null && tempSetter.Length == 16)
@@ -84,58 +82,30 @@ namespace SOME_IP_Server_Client
 
                     byte[] temp = new byte[4];
 
-                    Array.Copy(tempSetter, 0, temp, 0, 4);      //uzima iste vrijednosti???????
+                    Array.Copy(tempSetter, 0, temp, 0, 4); 
                     MessageID = BitConverter.ToUInt32(temp, 0);
 
-                    Array.Copy(tempSetter, 3, temp, 0, 4);
+                    Array.Copy(tempSetter, 4, temp, 0, 4);
                     Length = BitConverter.ToUInt32(temp, 0);
 
-                    Array.Copy(tempSetter, 7, temp, 0, 4);
+                    Array.Copy(tempSetter, 8, temp, 0, 4);
                     RequestID = BitConverter.ToUInt32(temp, 0);
 
-                    Array.Copy(tempSetter, 11, temp, 0, 1);
+                    Array.Copy(tempSetter, 12, temp, 0, 1);
                     ProtocolVersion = temp[0];
 
-                    Array.Copy(tempSetter, 12, temp, 0, 1);
+                    Array.Copy(tempSetter, 13, temp, 0, 1);
                     InterfaceVersion = temp[0];
 
-                    Array.Copy(tempSetter, 13, temp, 0, 1);
+                    Array.Copy(tempSetter, 14, temp, 0, 1);
                     MessageType = temp[0];
 
-                    Array.Copy(tempSetter, 14, temp, 0, 1);
+                    Array.Copy(tempSetter, 15, temp, 0, 1);
                     ReturnCode = temp[0];
                 }
                 else
                 { //što? try catch bolje?
                 }
-=======
-                  //koji endian?
-                //Buffer.BlockCopy(value, 0, BitConverter.GetBytes(MessageID), 0, 4);
-
-                  byte[] temp = new byte[4];
-
-                  Array.Copy(value, 0, temp, 0, 4);
-                  MessageID = BitConverter.ToUInt32(temp, 0);
-
-                  Array.Copy(value, 3, temp, 0, 4);
-                  Length = BitConverter.ToUInt32(temp, 0);
-
-                  Array.Copy(value, 7, temp, 0, 4);
-                  RequestID = BitConverter.ToUInt32(temp, 0);
-
-                  Array.Copy(value, 11, temp, 0, 1);
-                  ProtocolVersion = temp[0];
-
-                  Array.Copy(value, 12, temp, 0, 1);
-                  InterfaceVersion = temp[0];
-
-                  Array.Copy(value, 13, temp, 0, 1);
-                  MessageType = temp[0];
-
-                  Array.Copy(value, 14, temp, 0, 1);
-                  ReturnCode = temp[0];
-
->>>>>>> d41da02e2d633541e51bd6440a1c3f3688d83793
             }
         }
 
@@ -182,13 +152,9 @@ namespace SOME_IP_Server_Client
 
         public void DissectFullPayload(byte[] Full_MessagePayload)
         {
-<<<<<<< HEAD
             tempSetter = new byte[16];
             Array.Copy(Full_MessagePayload, tempSetter, 16);
             SomeIPHeader = new byte[16];
-=======
-            Array.Copy(Full_MessagePayload, SomeIPHeader, 16);     //dobijem nule, zasto???
->>>>>>> d41da02e2d633541e51bd6440a1c3f3688d83793
             Payload = new byte[Full_MessagePayload.Length - 16];
             Array.Copy(Full_MessagePayload, 16, Payload, 0, Payload.Length);
         }
