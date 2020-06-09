@@ -12,10 +12,13 @@ namespace SOME_IP_Server_Client
 {
     class SomeIPClient 
     {
+        public delegate void SomeIPClientEventHandler(byte[] e); 
+
+        public event SomeIPClientEventHandler ReceiveResultsEvent;
+
         static int port = 1200;
         UdpClient Client = new UdpClient(port); 
         IPEndPoint EndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1200);
-        byte[] ReceiveData;
 
         public void Connect()
         {
@@ -25,14 +28,11 @@ namespace SOME_IP_Server_Client
         {
             while (true)
             {
-                var ReceiveResults = await Client.ReceiveAsync(); //raise event
+                var ReceiveResults = await Client.ReceiveAsync(); 
 
-
-                //event handler, delegate
-                // if (ReceiveResults != null) { RaiseEventMsg(ReceiveResults.Buffer) }
-                if (ReceiveResults != null)
+                if (ReceiveResults != null) // ak nismo primili da ne yamaramo klasu
                 {
-                    OnDataReceived(Encoding.ASCII.GetBytes(ReceiveResults.Buffer.ToString()));
+                    OnDataReceived(ReceiveResults.Buffer);
                 }
             }
         }
@@ -42,14 +42,11 @@ namespace SOME_IP_Server_Client
             Client.Send(SOMEIP_Message, SOMEIP_Message.Length);
         }
 
-        public delegate void SomeIPClientEventHandler(object sender, byte[] e);
-        public event SomeIPClientEventHandler ReceiveResultsEvent;
-
         private void OnDataReceived(byte[] args)
         {
-            if (ReceiveResultsEvent != null)
+            if (ReceiveResultsEvent != null) // ako na formi nemao ono +0 onda da se ne rusi
             {
-                ReceiveResultsEvent(this, args);
+                ReceiveResultsEvent(args);
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SOME_IP_Server_Client
@@ -24,7 +25,9 @@ namespace SOME_IP_Server_Client
             DS_message.Entries_Array = new byte[] { 0xFF, 0xFF, 0xFF, 0xFA, 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0xAA, 0xBB, 0xCC, 0xDD };
             SomeIPServiceDiscoveryMessage sd = new SomeIPServiceDiscoveryMessage(test);
 
-            //SomeIPClient.SomeIPClientEventHandler += message.DissectFullPayload;         ERROR
+            RaisingEvent.ReceiveResultsEvent += message.DissectFullPayload;   
+
+            //svaki put kad client primi bytove onda ce se dogoditi da ce to sve biti prebaceno u metodu u message.DissectFullPayload
         }
 
         private void Client_Form_Load(object sender, EventArgs e)
@@ -34,6 +37,10 @@ namespace SOME_IP_Server_Client
             
             
         }
+
+            
+        
+
 
     }
 }
