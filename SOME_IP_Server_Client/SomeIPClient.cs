@@ -12,28 +12,34 @@ namespace SOME_IP_Server_Client
 {
     class SomeIPClient 
     {
-        public delegate void SomeIPClientEventHandler(byte[] e); 
+        public delegate void SomeIPClientEventHandler(byte[] e); //dodati bool jel šalje ili prima
 
         public event SomeIPClientEventHandler ReceiveResultsEvent;
 
-        static int port = 1200;
-        UdpClient Client = new UdpClient(port); 
+        UdpClient Client = new UdpClient(); 
         IPEndPoint EndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1200);
+        
 
         public void Connect()
         {
             Client.Connect(EndPoint);
         }
-        private async Task Receive()
+        public async Task Receive()
         {
+          UdpClient Server = new UdpClient(8080);
+          IPEndPoint EndPoint_Server = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080);
+
             while (true)
             {
-                var ReceiveResults = await Client.ReceiveAsync(); 
+                //await Task.Run(() =>
+                //{
+                    var ReceiveResults = await Server.ReceiveAsync();
 
-                if (ReceiveResults != null) // ak nismo primili da ne yamaramo klasu
-                {
-                    OnDataReceived(ReceiveResults.Buffer);
-                }
+                    if (ReceiveResults != null) // ak nismo primili da ne yamaramo klasu
+                    {
+                        OnDataReceived(ReceiveResults.Buffer);
+                    }
+               // });
             }
         }
 
@@ -49,5 +55,11 @@ namespace SOME_IP_Server_Client
                 ReceiveResultsEvent(args);
             }
         }
+
+        public void CloseConnection()
+        {
+            Client.Close();
+        }
+
     }
 }

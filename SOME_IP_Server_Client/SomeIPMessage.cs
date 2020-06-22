@@ -13,6 +13,10 @@ namespace SOME_IP_Server_Client
         ushort ServiceID, MethodID, ClientID, SessionID;  //16
         byte ProtocolVersion, InterfaceVersion, MessageType, ReturnCode;  //8
 
+        public enum SOMEIP_MessageID : uint
+        {
+            PICTURE = 0xABCD
+        }
        public enum SOMEIP_MessageType : byte
         { 
             REQUEST = 0x00,
@@ -126,6 +130,7 @@ namespace SOME_IP_Server_Client
         {
             get 
             {
+                SetLength();
                 return SomeIPHeader.Concat(Payload).ToArray();
             }
             set 
@@ -161,6 +166,13 @@ namespace SOME_IP_Server_Client
         //da izbjegnem error, obrisati poslije
        public SomeIPMessage()
         { }
+
+        public void SetLength()
+        {
+            Length = Convert.ToUInt32(Payload.Length) + 64; //Request ID sadrži 32 bita, Protocol Version, Interface Version, Message Type i 
+            //Return Code svaki po 8 bita što je još 32 bita.Ako ih zbrojimo dobijemo 64 bita. Uint32 je u bitovima pa dodajem 64????? Kako 64 u 32?
+           
+        }
 
     }
 }
