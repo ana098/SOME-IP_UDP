@@ -13,18 +13,30 @@ namespace SOME_IP_Server_Client
 {
     public partial class Client_Form : Form
     {
+<<<<<<< HEAD
         SomeIPMessage imgMessage = new SomeIPMessage(Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.PICTURE), 0xABAB5555, Convert.ToByte( SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
         //Convert.ToUInt32( SomeIPMessage.SOMEIP_MessageID.PICTURE)
 
 
         SomeIPClient RaisingEvent;
         ConnectDataInput Connect_Form = new ConnectDataInput();
+=======
+        SomeIPMessage imgMessage = new SomeIPMessage(Convert.ToUInt32( SomeIPMessage.SOMEIP_MessageID.PICTURE), 0xAAAA, Convert.ToByte( SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
+        SomeIPClient RaisingEvent = new SomeIPClient();
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
         public static readonly List<string> ImageExtensions = new List<string> { ".JPG", ".JPEG", ".JPE", ".BMP", ".GIF", ".PNG" };
 
         public Client_Form()
         {
             InitializeComponent();
+<<<<<<< HEAD
         }
+=======
+            TaskHandler();
+            RaisingEvent.ReceiveResultsEvent += checkReceiveMessage;
+        }
+
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
         private byte[] prepareImageMessage(Image image)  //ili Bitmap?
         {
             ImageConverter imageConverter = new ImageConverter();
@@ -55,31 +67,47 @@ namespace SOME_IP_Server_Client
 
         private void Btn_connect_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
                 Connect_Form.ShowDialog();
 
                 RaisingEvent = new SomeIPClient(Connect_Form.Port, Connect_Form.EndPointPort);
                 RaisingEvent.ReceiveResultsEvent += checkReceiveMessage;
               //  RaisingEvent.Connect();
                 RaisingEvent.Receive();
+=======
+            RaisingEvent.Connect();
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
         }
 
         private void Btn_Send_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             prepareImageMessage(pictureBox1.Image);
             RaisingEvent.Send(imgMessage.FullMessagePayload);//1614//1634
             //RaisingEvent.Send(prepareImageMessage(pictureBox1.Image));
+=======
+            RaisingEvent.Send(prepareImageMessage(pictureBox1.Image));
+            //RaisingEvent.CloseConnection();
+
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
         }
 
         public void checkReceiveMessage(byte[] udpPayload)
         {
             SomeIPMessage temp = new SomeIPMessage(udpPayload);
+<<<<<<< HEAD
             ImageConverter converter = new ImageConverter();
             pictureBox1.Image = (Image)converter.ConvertFrom(temp.Payload);
+=======
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
 
             if (temp.MessageID == Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.PICTURE))
             {
                 imgMessage = temp;
+<<<<<<< HEAD
                 
+=======
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
                 pictureBox1.Refresh(); //da ne moram praviti metodu ShowMessage
             }
 
@@ -94,15 +122,19 @@ namespace SOME_IP_Server_Client
             //RaisingEvent.Close();
         }
 
+<<<<<<< HEAD
         private void RefreshBtn_Click(object sender, EventArgs e)
         {
             pictureBox1.Refresh();
         }
 
+=======
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
         private async void TaskHandler()
         {
             await RaisingEvent.Receive();
         }
+<<<<<<< HEAD
         private void button1_Click(object sender, EventArgs e)
         {
             foreach (byte b in imgMessage.SomeIPHeader)
@@ -110,5 +142,8 @@ namespace SOME_IP_Server_Client
                  MessageBox.Show(b.ToString());
             }
         }
+=======
+
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
     }
 }

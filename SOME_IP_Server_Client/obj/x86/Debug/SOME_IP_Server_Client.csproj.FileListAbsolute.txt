@@ -16,6 +16,7 @@ C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csproj.CoreCompileInputs.cache
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.exe
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.pdb
+<<<<<<< HEAD
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.exe.config
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.exe
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.pdb
@@ -27,3 +28,5 @@ C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csproj.CoreCompileInputs.cache
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.exe
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.pdb
+=======
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580

@@ -15,8 +15,12 @@ namespace SOME_IP_Server_Client
 
         public enum SOMEIP_MessageID : uint
         {
+<<<<<<< HEAD
             PICTURE = 0xAABBCCDD ,   //43 981
              TEXT = 0x010203AA
+=======
+            PICTURE = 0xABCD
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
         }
        public enum SOMEIP_MessageType : byte
         { 
@@ -76,7 +80,12 @@ namespace SOME_IP_Server_Client
                     .Concat(BitConverter.GetBytes(MessageType))
                     .Concat(BitConverter.GetBytes(ReturnCode))).ToArray();
             }
+<<<<<<< HEAD
             private set 
+=======
+            //private    //komentirano radi testiranja
+              set 
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
             {
                 //Buffer.BlockCopy(value, 0, BitConverter.GetBytes(MessageID), 0, 4);
 
@@ -129,7 +138,11 @@ namespace SOME_IP_Server_Client
         {
             get 
             {
+<<<<<<< HEAD
                 //SetLength();
+=======
+                SetLength();
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
                 return SomeIPHeader.Concat(Payload).ToArray();
             }
             set 
@@ -162,6 +175,12 @@ namespace SOME_IP_Server_Client
             Payload = new byte[Full_MessagePayload.Length - 16];
             Array.Copy(Full_MessagePayload, 16, Payload, 0, Payload.Length);
         }
+<<<<<<< HEAD
+=======
+        //da izbjegnem error, obrisati poslije
+       public SomeIPMessage()
+        { }
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
 
         public void SetLength()
         {

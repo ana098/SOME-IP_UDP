@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="ConnectDataInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +59,11 @@
     <Compile Include="frmSOMEIP.cs">
       <SubType>Form</SubType>
     </Compile>
+=======
+    <Compile Include="frmSOMEIP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
     <Compile Include="frmSOMEIP.Designer.cs">
       <DependentUpon>frmSOMEIP.cs</DependentUpon>
     </Compile>
@@ -68,9 +74,12 @@
     <Compile Include="SomeIPClient.cs" />
     <Compile Include="SomeIPMessage.cs" />
     <Compile Include="SomeIPServiceDiscoveryMessage.cs" />
+<<<<<<< HEAD
     <EmbeddedResource Include="ConnectDataInput.resx">
       <DependentUpon>ConnectDataInput.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
     <EmbeddedResource Include="frmSOMEIP.resx">
       <DependentUpon>frmSOMEIP.cs</DependentUpon>
     </EmbeddedResource>
