@@ -12,10 +12,8 @@ namespace SOME_IP_Server_Client
 {
     class SomeIPClient 
     {
-<<<<<<< HEAD
         int port, endPointPort;
         public delegate void SomeIPClientEventHandler(byte[] e); //dodati bool jel šalje ili prima
-        ConnectDataInput DataInput = new ConnectDataInput();
 
         public event SomeIPClientEventHandler ReceiveResultsEvent;
 
@@ -29,15 +27,6 @@ namespace SOME_IP_Server_Client
             Client = new UdpClient(Port);
             EndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), EndPointPort);
         }
-
-        public SomeIPClient()
-        {
-            Port = DataInput.Port;
-            EndPointPort = DataInput.EndPointPort;
-            Client = new UdpClient(Port);
-            EndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), EndPointPort);
-        }
-
         public int Port
         {
             get { return port; }
@@ -61,38 +50,6 @@ namespace SOME_IP_Server_Client
                     }
             }
         }
-=======
-        public delegate void SomeIPClientEventHandler(byte[] e); //dodati bool jel šalje ili prima
-
-        public event SomeIPClientEventHandler ReceiveResultsEvent;
-
-        UdpClient Client = new UdpClient(); 
-        IPEndPoint EndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1200);
-        
-
-        public void Connect()
-        {
-            Client.Connect(EndPoint);
-        }
-        public async Task Receive()
-        {
-          UdpClient Server = new UdpClient(8080);
-          IPEndPoint EndPoint_Server = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080);
-
-            while (true)
-            {
-                //await Task.Run(() =>
-                //{
-                    var ReceiveResults = await Server.ReceiveAsync();
-
-                    if (ReceiveResults != null) // ak nismo primili da ne yamaramo klasu
-                    {
-                        OnDataReceived(ReceiveResults.Buffer);
-                    }
-               // });
-            }
-        }
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
 
         public void Send(byte[] SOMEIP_Message)
         {
@@ -113,21 +70,5 @@ namespace SOME_IP_Server_Client
             Client.Close();
         }
 
-<<<<<<< HEAD
-=======
-        private void OnDataReceived(byte[] args)
-        {
-            if (ReceiveResultsEvent != null) // ako na formi nemao ono +0 onda da se ne rusi
-            {
-                ReceiveResultsEvent(args);
-            }
-        }
-
-        public void CloseConnection()
-        {
-            Client.Close();
-        }
-
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
     }
 }

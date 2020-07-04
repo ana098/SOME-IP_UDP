@@ -13,39 +13,26 @@ namespace SOME_IP_Server_Client
 {
     public partial class Client_Form : Form
     {
-<<<<<<< HEAD
-        SomeIPMessage imgMessage = new SomeIPMessage(Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.PICTURE), 0xABAB5555, Convert.ToByte( SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
-        //Convert.ToUInt32( SomeIPMessage.SOMEIP_MessageID.PICTURE)
+        SomeIPMessage Message; 
 
-
-        SomeIPClient RaisingEvent;
+        SomeIPClient Client;
         ConnectDataInput Connect_Form = new ConnectDataInput();
-=======
-        SomeIPMessage imgMessage = new SomeIPMessage(Convert.ToUInt32( SomeIPMessage.SOMEIP_MessageID.PICTURE), 0xAAAA, Convert.ToByte( SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
-        SomeIPClient RaisingEvent = new SomeIPClient();
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
         public static readonly List<string> ImageExtensions = new List<string> { ".JPG", ".JPEG", ".JPE", ".BMP", ".GIF", ".PNG" };
 
         public Client_Form()
         {
             InitializeComponent();
-<<<<<<< HEAD
         }
-=======
-            TaskHandler();
-            RaisingEvent.ReceiveResultsEvent += checkReceiveMessage;
-        }
-
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
         private byte[] prepareImageMessage(Image image)  //ili Bitmap?
         {
             ImageConverter imageConverter = new ImageConverter();
             byte[] temp = (byte[])imageConverter.ConvertTo(image, typeof(byte[]));
-            return imgMessage.Payload = temp;
+            return Message.Payload = temp;
         }
 
         private void Btn_LoadData_Click(object sender, EventArgs e)
         {
+            Message = new SomeIPMessage(Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.PICTURE), 0xABAB5555, Convert.ToByte(SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "Image Files(*.jpg;*.jpeg;*.gif;*.bmp)|*.jpg;*.jpeg;*.gif;*.bmp"; //ovime ograničavam da bude slika izabrana pa provjera i ne treba
 
@@ -56,7 +43,8 @@ namespace SOME_IP_Server_Client
                     if (ImageExtensions.Contains(Path.GetExtension(openFile.FileName).ToUpperInvariant()))
                     {
                         pictureBox1.Image = new Bitmap(openFile.FileName);
-                    }
+                        prepareImageMessage(pictureBox1.Image);
+                }
                     else
                     {
                         MessageBox.Show("The selected data is not an image!");
@@ -67,83 +55,61 @@ namespace SOME_IP_Server_Client
 
         private void Btn_connect_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
                 Connect_Form.ShowDialog();
 
-                RaisingEvent = new SomeIPClient(Connect_Form.Port, Connect_Form.EndPointPort);
-                RaisingEvent.ReceiveResultsEvent += checkReceiveMessage;
-              //  RaisingEvent.Connect();
-                RaisingEvent.Receive();
-=======
-            RaisingEvent.Connect();
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
+                Client = new SomeIPClient(Connect_Form.Port, Connect_Form.EndPointPort);
+                Log.MessageSent("Port: " + Connect_Form.Port.ToString()+"  End Point: " + Connect_Form.EndPointPort.ToString());
+                Client.ReceiveResultsEvent += checkReceiveMessage;
+                Client.Receive();
         }
 
         private void Btn_Send_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            prepareImageMessage(pictureBox1.Image);
-            RaisingEvent.Send(imgMessage.FullMessagePayload);//1614//1634
-            //RaisingEvent.Send(prepareImageMessage(pictureBox1.Image));
-=======
-            RaisingEvent.Send(prepareImageMessage(pictureBox1.Image));
-            //RaisingEvent.CloseConnection();
-
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
+            checkSendMessage();
+            Client.Send(Message.FullMessagePayload);//1614//1634
+            Log.MessageSent("SENDING...");
+            pictureBox1.Image = null;
+            WriteLog();
         }
 
         public void checkReceiveMessage(byte[] udpPayload)
         {
             SomeIPMessage temp = new SomeIPMessage(udpPayload);
-<<<<<<< HEAD
-            ImageConverter converter = new ImageConverter();
-            pictureBox1.Image = (Image)converter.ConvertFrom(temp.Payload);
-=======
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
+            Log.MessageSent("RECEIVING...");
 
             if (temp.MessageID == Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.PICTURE))
             {
-                imgMessage = temp;
-<<<<<<< HEAD
+                ImageConverter converter = new ImageConverter();
+                pictureBox1.Image = (Image)converter.ConvertFrom(temp.Payload);
+                Log.MessageSent("PICTURE");
+                //Message = temp;
                 
-=======
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
-                pictureBox1.Refresh(); //da ne moram praviti metodu ShowMessage
+                pictureBox1.Refresh(); 
             }
-
-            else
+            else if(temp.MessageID == Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.TEXT))
             {
-                //text je ili vec nesto drugo
+                //Message = temp;
+                Log.MessageSent("TEXT");
+                textBox1.Text = System.Text.Encoding.Default.GetString(temp.Payload);
             }
+            WriteLog();
         }
 
-        private void Client_Form_Load(object sender, EventArgs e)
+        public void WriteLog()
         {
-            //RaisingEvent.Close();
+            tbLog.AppendText(Log.Log_Txt());
+            tbLog.ScrollToCaret();
         }
 
-<<<<<<< HEAD
-        private void RefreshBtn_Click(object sender, EventArgs e)
+        private void checkSendMessage()
         {
-            pictureBox1.Refresh();
-        }
-
-=======
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
-        private async void TaskHandler()
-        {
-            await RaisingEvent.Receive();
-        }
-<<<<<<< HEAD
-        private void button1_Click(object sender, EventArgs e)
-        {
-            foreach (byte b in imgMessage.SomeIPHeader)
+            if(pictureBox1.Image == null)
             {
-                 MessageBox.Show(b.ToString());
+                Message = new SomeIPMessage(Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.TEXT), 0xABAB5555, Convert.ToByte(SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
+                byte[] temp = Encoding.ASCII.GetBytes(textBox1.Text);
+                Message.Payload = temp;
             }
         }
-=======
 
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
     }
 }

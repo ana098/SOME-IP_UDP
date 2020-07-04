@@ -34,11 +34,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btn_connect = new System.Windows.Forms.Button();
             this.btn_Send = new System.Windows.Forms.Button();
-<<<<<<< HEAD
             this.RefreshBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-=======
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,7 +93,6 @@
             this.btn_Send.UseVisualStyleBackColor = true;
             this.btn_Send.Click += new System.EventHandler(this.Btn_Send_Click);
             // 
-<<<<<<< HEAD
             // RefreshBtn
             // 
             this.RefreshBtn.Location = new System.Drawing.Point(365, 288);
@@ -106,30 +101,13 @@
             this.RefreshBtn.TabIndex = 6;
             this.RefreshBtn.Text = "Refresh";
             this.RefreshBtn.UseVisualStyleBackColor = true;
-            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(533, 243);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 29);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Receive";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-=======
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
             // Client_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(827, 500);
-<<<<<<< HEAD
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.RefreshBtn);
-=======
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
             this.Controls.Add(this.btn_Send);
             this.Controls.Add(this.btn_connect);
             this.Controls.Add(this.textBox1);
@@ -139,7 +117,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Client_Form";
             this.Text = "SOME/IP";
-            this.Load += new System.EventHandler(this.Client_Form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -154,11 +131,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btn_connect;
         private System.Windows.Forms.Button btn_Send;
-<<<<<<< HEAD
         private System.Windows.Forms.Button RefreshBtn;
-        private System.Windows.Forms.Button button1;
-=======
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
     }
 }
 

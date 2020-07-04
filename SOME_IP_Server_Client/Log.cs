@@ -5,14 +5,23 @@ using System.Text;
 
 namespace SOME_IP_Server_Client
 {
-    class Log
+    static class  Log
     {
-        StringBuilder logTxt = new StringBuilder();
+        static StringBuilder logTxt = new StringBuilder();
 
-        public void MessageSent()
-        { }
+        public static void MessageSent(string text)
+        {
+             logTxt.AppendLine(text);
+        }
 
-        public void MessageReceived()
-        { }
+        public static void MessageReceived()
+        { 
+        
+        }
+
+        public static string Log_Txt()
+        {
+            return logTxt.ToString();
+        }
     }
 }

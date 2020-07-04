@@ -45,11 +45,15 @@ namespace SOME_IP_Server_Client
             }
         }
 
+        private void ConnectDataInput_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void InputDataBtn_Click(object sender, EventArgs e)
         {
             Port = Convert.ToInt32(portTxtBox.Text);
             EndPointPort = Convert.ToInt32(EPtxtBox.Text);
-            //Client = new SomeIPClient(Convert.ToInt32(portTxtBox.Text), Convert.ToInt32(EPtxtBox.Text));
             this.Close();
         }
 

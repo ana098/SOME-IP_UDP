@@ -103,6 +103,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ConnectDataInput";
             this.Text = "ConnectDataInput";
+            this.Load += new System.EventHandler(this.ConnectDataInput_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

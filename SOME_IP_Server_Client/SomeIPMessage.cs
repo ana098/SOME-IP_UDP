@@ -15,12 +15,8 @@ namespace SOME_IP_Server_Client
 
         public enum SOMEIP_MessageID : uint
         {
-<<<<<<< HEAD
             PICTURE = 0xAABBCCDD ,   //43 981
-             TEXT = 0x010203AA
-=======
-            PICTURE = 0xABCD
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
+            TEXT = 0x010203AA
         }
        public enum SOMEIP_MessageType : byte
         { 
@@ -71,21 +67,30 @@ namespace SOME_IP_Server_Client
         {
             get 
             {
-                //.Concat(new byte[] { ProtocolVersion })
+                byte[] PV = new byte[] { ProtocolVersion };
+                byte[] IV = new byte[] { InterfaceVersion };
+                byte[] MT = new byte[] { MessageType };
+                byte[] RC = new byte[] { ReturnCode };
+
+                Log.MessageSent("MessageID: " + MessageID);
+                Log.MessageSent("Length: " + Length);
+                Log.MessageSent("RequestID: " + RequestID);
+                Log.MessageSent("Protocol Version: " + ProtocolVersion);
+                Log.MessageSent("Interface Version: " + InterfaceVersion);
+                Log.MessageSent("Message Type: " + MessageType);
+                Log.MessageSent("Return Code: " + ReturnCode);
+                
+
+
                 return BitConverter.GetBytes(MessageID)
-                    .Concat(BitConverter.GetBytes(Length))
-                    .Concat(BitConverter.GetBytes(RequestID))
-                    .Concat(BitConverter.GetBytes(ProtocolVersion)
-                    .Concat(BitConverter.GetBytes(InterfaceVersion))
-                    .Concat(BitConverter.GetBytes(MessageType))
-                    .Concat(BitConverter.GetBytes(ReturnCode))).ToArray();
+                        .Concat(BitConverter.GetBytes(Length))
+                        .Concat(BitConverter.GetBytes(RequestID))
+                        .Concat(PV)
+                        .Concat(IV)
+                        .Concat(MT)
+                        .Concat(RC).ToArray();
             }
-<<<<<<< HEAD
             private set 
-=======
-            //private    //komentirano radi testiranja
-              set 
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
             {
                 //Buffer.BlockCopy(value, 0, BitConverter.GetBytes(MessageID), 0, 4);
 
@@ -114,6 +119,14 @@ namespace SOME_IP_Server_Client
 
                     Array.Copy(tempSetter, 15, temp, 0, 1);
                     ReturnCode = temp[0];
+
+                    Log.MessageSent("MessageID: " + MessageID);
+                    Log.MessageSent("Length: " + Length);
+                    Log.MessageSent("RequestID: " + RequestID);
+                    Log.MessageSent("Protocol Version: " + ProtocolVersion);
+                    Log.MessageSent("Interface Version: " + InterfaceVersion);
+                    Log.MessageSent("Message Type: " + MessageType);
+                    Log.MessageSent("Return Code: " + ReturnCode);
                 }
                 else
                 { //što? try catch bolje?
@@ -138,11 +151,7 @@ namespace SOME_IP_Server_Client
         {
             get 
             {
-<<<<<<< HEAD
-                //SetLength();
-=======
                 SetLength();
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
                 return SomeIPHeader.Concat(Payload).ToArray();
             }
             set 
@@ -152,8 +161,7 @@ namespace SOME_IP_Server_Client
         }
 
         public SomeIPMessage(uint Mess_ID, uint Req_ID,byte Mess_Type, byte Ret_Code)
-        { 
-            //nema length??
+        {
             MessageID = Mess_ID;
             RequestID = Req_ID;
             MessageType = Mess_Type;
@@ -169,23 +177,17 @@ namespace SOME_IP_Server_Client
 
         public void  DissectFullPayload(byte[] Full_MessagePayload)
         {
-            tempSetter = new byte[16];
-            Array.Copy(Full_MessagePayload, tempSetter, 16);
-            SomeIPHeader = new byte[16];
-            Payload = new byte[Full_MessagePayload.Length - 16];
-            Array.Copy(Full_MessagePayload, 16, Payload, 0, Payload.Length);
+             tempSetter = new byte[16];
+             Array.Copy(Full_MessagePayload, tempSetter, 16);
+             SomeIPHeader = new byte[16];
+             Payload = new byte[Full_MessagePayload.Length - 16];
+             Array.Copy(Full_MessagePayload, 16, Payload, 0, Payload.Length);
         }
-<<<<<<< HEAD
-=======
-        //da izbjegnem error, obrisati poslije
-       public SomeIPMessage()
-        { }
->>>>>>> c471b0d41f1dc4d4984b731ed29efef68aa06580
 
         public void SetLength()
         {
-            Length = Convert.ToUInt32(Payload.Length) + 64; //Request ID sadrži 32 bita, Protocol Version, Interface Version, Message Type i 
-            //Return Code svaki po 8 bita što je još 32 bita.Ako ih zbrojimo dobijemo 64 bita. Uint32 je u bitovima pa dodajem 64????? Kako 64 u 32?
+            Length = Convert.ToUInt32(Payload.Length) + 8; //Request ID sadrži 32 bita, Protocol Version, Interface Version, Message Type i 
+            //Return Code svaki po 8 bita što je još 32 bita.Ako ih zbrojimo dobijemo 64 bita
            
         }
 
