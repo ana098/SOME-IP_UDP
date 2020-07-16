@@ -19,8 +19,8 @@ namespace SOME_IP_Server_Client
             byte[] temp = new byte[4];
             uint MinorVersion, TTL;
             ushort InstanceID, ServiceID, EventgroupID, Length;
-            byte Type, Index1opt, Index2opt, MajorVersion, NumberOfOpt1, NumberOfOpt2, Reserved_E, InitialDataRequestedFlag, Reserved2_E, Counter, ZeroTerminatedConfigurationString;
-            // nema potrebe za svim inicijaliziranim varijablama?
+            byte Type, Index1opt, Index2opt, MajorVersion, NumberOfOpt1, NumberOfOpt2, Reserved_E, 
+                InitialDataRequestedFlag, Reserved2_E, Counter, ZeroTerminatedConfigurationString;
             public byte[] Entries_Array
             {
                 get
@@ -36,10 +36,8 @@ namespace SOME_IP_Server_Client
                         .Concat(BitConverter.GetBytes(TTL))
                         .Concat(BitConverter.GetBytes(MinorVersion))).ToArray();
                 }
-              // private   //komentirano radi testiranja
-                set
+                private set
                 {
-
                     Array.Copy(value, 0, temp, 0, 1);
                     Type = temp[0];
 
@@ -82,7 +80,7 @@ namespace SOME_IP_Server_Client
            Flags = temp[0];
 
            Array.Copy(Payload, 1, temp, 0, 3);
-           Reserved_Header = temp.Take(3).ToArray();    //uzimam 3 bytea iz polja od 4 pa je zadnje 0 defaultno, zato cijeli temp ne spremam nego opet uzimam 3
+           Reserved_Header = temp.Take(3).ToArray();   
 
            Array.Copy(Payload, 4, temp, 0, 4);
            LengthOfEntriesArray = BitConverter.ToUInt32(temp,0);
@@ -95,14 +93,14 @@ namespace SOME_IP_Server_Client
            Array.Copy(Payload, 16, Options_Array, 0, 4);
         }
 
-        public SomeIPServiceDiscoveryMessage(byte Flag, byte[] ReservedHeader, byte[] EntriesArray, byte[] OptionsArray, uint Mess_ID, uint Req_ID, byte Mess_Type, byte Ret_Code)
+        public SomeIPServiceDiscoveryMessage(byte Flag, byte[] ReservedHeader, byte[] EntriesArray, 
+            byte[] OptionsArray, uint Mess_ID, uint Req_ID, byte Mess_Type, byte Ret_Code)
             : base(Mess_ID, Req_ID,Mess_Type,Ret_Code) 
         {
             Flags = Flag;
             Reserved_Header = ReservedHeader;
             Entries_Array = EntriesArray;
             Options_Array = OptionsArray;
-            //nema length? --računamo ga length = Entries_Array.Length; Provjeriti je li duljina br elemenata ili u byteovima
         }
 
     }

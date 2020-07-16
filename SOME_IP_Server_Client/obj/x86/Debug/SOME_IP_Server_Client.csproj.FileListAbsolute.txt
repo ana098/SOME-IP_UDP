@@ -27,3 +27,4 @@ C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csproj.CoreCompileInputs.cache
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.exe
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.pdb
+C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.ConnectDataInput.resources

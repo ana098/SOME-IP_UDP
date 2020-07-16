@@ -16,7 +16,8 @@ namespace SOME_IP_Server_Client
         public enum SOMEIP_MessageID : uint
         {
             PICTURE = 0xAABBCCDD ,   //43 981
-            TEXT = 0x010203AA
+            TEXT = 0x010203AA,
+            SOUND = 0x11223344
         }
        public enum SOMEIP_MessageType : byte
         { 
@@ -72,16 +73,6 @@ namespace SOME_IP_Server_Client
                 byte[] MT = new byte[] { MessageType };
                 byte[] RC = new byte[] { ReturnCode };
 
-                Log.MessageSent("MessageID: " + MessageID);
-                Log.MessageSent("Length: " + Length);
-                Log.MessageSent("RequestID: " + RequestID);
-                Log.MessageSent("Protocol Version: " + ProtocolVersion);
-                Log.MessageSent("Interface Version: " + InterfaceVersion);
-                Log.MessageSent("Message Type: " + MessageType);
-                Log.MessageSent("Return Code: " + ReturnCode);
-                
-
-
                 return BitConverter.GetBytes(MessageID)
                         .Concat(BitConverter.GetBytes(Length))
                         .Concat(BitConverter.GetBytes(RequestID))
@@ -92,11 +83,8 @@ namespace SOME_IP_Server_Client
             }
             private set 
             {
-                //Buffer.BlockCopy(value, 0, BitConverter.GetBytes(MessageID), 0, 4);
-
                 if (tempSetter != null && tempSetter.Length == 16)
                 {
-
                     byte[] temp = new byte[4];
 
                     Array.Copy(tempSetter, 0, temp, 0, 4); 
@@ -119,18 +107,23 @@ namespace SOME_IP_Server_Client
 
                     Array.Copy(tempSetter, 15, temp, 0, 1);
                     ReturnCode = temp[0];
-
-                    Log.MessageSent("MessageID: " + MessageID);
-                    Log.MessageSent("Length: " + Length);
-                    Log.MessageSent("RequestID: " + RequestID);
-                    Log.MessageSent("Protocol Version: " + ProtocolVersion);
-                    Log.MessageSent("Interface Version: " + InterfaceVersion);
-                    Log.MessageSent("Message Type: " + MessageType);
-                    Log.MessageSent("Return Code: " + ReturnCode);
                 }
                 else
-                { //što? try catch bolje?
+                { 
                 }
+            }
+        }
+
+        public uint GetLength
+        {
+            get
+            {
+                return Length;
+            }
+
+            private set
+            {
+                Length = value;
             }
         }
 
@@ -146,6 +139,8 @@ namespace SOME_IP_Server_Client
                 SessionID = (ushort)(value >> 16);
             }
         }
+
+
 
         public byte[] FullMessagePayload
         {

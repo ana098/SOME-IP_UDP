@@ -13,7 +13,7 @@ namespace SOME_IP_Server_Client
     class SomeIPClient 
     {
         int port, endPointPort;
-        public delegate void SomeIPClientEventHandler(byte[] e); //dodati bool jel šalje ili prima
+        public delegate void SomeIPClientEventHandler(byte[] e); 
 
         public event SomeIPClientEventHandler ReceiveResultsEvent;
 
@@ -44,7 +44,7 @@ namespace SOME_IP_Server_Client
             {
 
                 var ReceiveResults = await Client.ReceiveAsync();
-                    if (ReceiveResults != null) // ak nismo primili da ne yamaramo klasu
+                    if (ReceiveResults != null) 
                     {
                         OnDataReceived(ReceiveResults.Buffer);
                     }
@@ -59,7 +59,7 @@ namespace SOME_IP_Server_Client
 
         private void OnDataReceived(byte[] args)
         {
-            if (ReceiveResultsEvent != null) // ako na formi nemao ono +0 onda da se ne rusi
+            if (ReceiveResultsEvent != null) 
             {
                 ReceiveResultsEvent(args);
             }

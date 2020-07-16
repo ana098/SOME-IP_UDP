@@ -34,7 +34,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btn_connect = new System.Windows.Forms.Button();
             this.btn_Send = new System.Windows.Forms.Button();
-            this.RefreshBtn = new System.Windows.Forms.Button();
+            this.PlayBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cb_Choice = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +60,7 @@
             // 
             // btn_LoadData
             // 
-            this.btn_LoadData.Location = new System.Drawing.Point(533, 65);
+            this.btn_LoadData.Location = new System.Drawing.Point(533, 112);
             this.btn_LoadData.Name = "btn_LoadData";
             this.btn_LoadData.Size = new System.Drawing.Size(124, 29);
             this.btn_LoadData.TabIndex = 2;
@@ -68,7 +70,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(365, 25);
+            this.textBox1.Location = new System.Drawing.Point(367, 74);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(448, 22);
             this.textBox1.TabIndex = 3;
@@ -85,7 +87,7 @@
             // 
             // btn_Send
             // 
-            this.btn_Send.Location = new System.Drawing.Point(533, 113);
+            this.btn_Send.Location = new System.Drawing.Point(533, 161);
             this.btn_Send.Name = "btn_Send";
             this.btn_Send.Size = new System.Drawing.Size(124, 29);
             this.btn_Send.TabIndex = 5;
@@ -93,21 +95,47 @@
             this.btn_Send.UseVisualStyleBackColor = true;
             this.btn_Send.Click += new System.EventHandler(this.Btn_Send_Click);
             // 
-            // RefreshBtn
+            // PlayBtn
             // 
-            this.RefreshBtn.Location = new System.Drawing.Point(365, 288);
-            this.RefreshBtn.Name = "RefreshBtn";
-            this.RefreshBtn.Size = new System.Drawing.Size(124, 29);
-            this.RefreshBtn.TabIndex = 6;
-            this.RefreshBtn.Text = "Refresh";
-            this.RefreshBtn.UseVisualStyleBackColor = true;
+            this.PlayBtn.Enabled = false;
+            this.PlayBtn.Location = new System.Drawing.Point(365, 288);
+            this.PlayBtn.Name = "PlayBtn";
+            this.PlayBtn.Size = new System.Drawing.Size(124, 29);
+            this.PlayBtn.TabIndex = 6;
+            this.PlayBtn.Text = "Play sound";
+            this.PlayBtn.UseVisualStyleBackColor = true;
+            this.PlayBtn.Click += new System.EventHandler(this.PlayBtn_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(382, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(173, 18);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Choose what to send:";
+            // 
+            // cb_Choice
+            // 
+            this.cb_Choice.FormattingEnabled = true;
+            this.cb_Choice.Items.AddRange(new object[] {
+            "Text",
+            "Picture",
+            "Sound"});
+            this.cb_Choice.Location = new System.Drawing.Point(577, 22);
+            this.cb_Choice.Name = "cb_Choice";
+            this.cb_Choice.Size = new System.Drawing.Size(173, 24);
+            this.cb_Choice.TabIndex = 8;
             // 
             // Client_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(827, 500);
-            this.Controls.Add(this.RefreshBtn);
+            this.Controls.Add(this.cb_Choice);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.PlayBtn);
             this.Controls.Add(this.btn_Send);
             this.Controls.Add(this.btn_connect);
             this.Controls.Add(this.textBox1);
@@ -131,7 +159,9 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btn_connect;
         private System.Windows.Forms.Button btn_Send;
-        private System.Windows.Forms.Button RefreshBtn;
+        private System.Windows.Forms.Button PlayBtn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cb_Choice;
     }
 }
 

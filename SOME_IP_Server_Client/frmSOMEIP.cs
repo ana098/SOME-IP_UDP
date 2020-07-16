@@ -8,48 +8,60 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Media;
 
 namespace SOME_IP_Server_Client
 {
     public partial class Client_Form : Form
     {
-        SomeIPMessage Message; 
-
+        SomeIPMessage Message;
+        //SoundPlayer Player = new SoundPlayer();
         SomeIPClient Client;
         ConnectDataInput Connect_Form = new ConnectDataInput();
+        OpenFileDialog openFile = new OpenFileDialog();
         public static readonly List<string> ImageExtensions = new List<string> { ".JPG", ".JPEG", ".JPE", ".BMP", ".GIF", ".PNG" };
 
         public Client_Form()
         {
             InitializeComponent();
         }
-        private byte[] prepareImageMessage(Image image)  //ili Bitmap?
+        private byte[] prepareImageMessage(Image image) 
         {
             ImageConverter imageConverter = new ImageConverter();
             byte[] temp = (byte[])imageConverter.ConvertTo(image, typeof(byte[]));
             return Message.Payload = temp;
         }
 
+        private byte[] prepareSoundMessage()
+        {
+            byte[] temp = File.ReadAllBytes(openFile.FileName);
+            return Message.Payload = temp;
+        }
+
         private void Btn_LoadData_Click(object sender, EventArgs e)
         {
-            Message = new SomeIPMessage(Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.PICTURE), 0xABAB5555, Convert.ToByte(SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "Image Files(*.jpg;*.jpeg;*.gif;*.bmp)|*.jpg;*.jpeg;*.gif;*.bmp"; //ovime ograničavam da bude slika izabrana pa provjera i ne treba
+
+            if (cb_Choice.SelectedItem == "Picture")
+            {
+                openFile.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            }
+            else if(cb_Choice.SelectedItem == "Sound")
+            {
+                openFile.Filter = "Audio (*.cs,*.acc,*.wma, *.wav)|*.cs;*.mp3;*.wma, *.wav|All Files (*.*)|*.*";
+            }
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = openFile.FileName;
-
-                    if (ImageExtensions.Contains(Path.GetExtension(openFile.FileName).ToUpperInvariant()))
-                    {
-                        pictureBox1.Image = new Bitmap(openFile.FileName);
-                        prepareImageMessage(pictureBox1.Image);
+                if (cb_Choice.SelectedItem == "Picture")
+                {
+                    pictureBox1.Image = new Bitmap(openFile.FileName);
                 }
-                    else
-                    {
-                        MessageBox.Show("The selected data is not an image!");
-                    }
-                
+
+                else if(cb_Choice.SelectedItem == "Sound")
+                {
+                    PlayBtn.Enabled = true;
+                }  
             }
         }
 
@@ -65,9 +77,13 @@ namespace SOME_IP_Server_Client
 
         private void Btn_Send_Click(object sender, EventArgs e)
         {
-            checkSendMessage();
+            CheckSendMessage();
             Client.Send(Message.FullMessagePayload);//1614//1634
             Log.MessageSent("SENDING...");
+            Log.MessageSent("MessageID:  " + Message.MessageID.ToString());
+            Log.MessageSent("RequestID:  " + Message.RequestID.ToString());
+            Log.MessageSent("Lenght:  " + Message.GetLength.ToString());
+
             pictureBox1.Image = null;
             WriteLog();
         }
@@ -76,21 +92,35 @@ namespace SOME_IP_Server_Client
         {
             SomeIPMessage temp = new SomeIPMessage(udpPayload);
             Log.MessageSent("RECEIVING...");
+            Log.MessageSent("MessageID:  " + temp.MessageID.ToString());
+            Log.MessageSent("RequestID:  " + temp.RequestID.ToString());
+            Log.MessageSent("Lenght:  " + temp.GetLength.ToString());
 
             if (temp.MessageID == Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.PICTURE))
             {
                 ImageConverter converter = new ImageConverter();
                 pictureBox1.Image = (Image)converter.ConvertFrom(temp.Payload);
-                Log.MessageSent("PICTURE");
-                //Message = temp;
+                Log.MessageSent("---PICTURE---");
+                PlayBtn.Enabled = false;
+                textBox1.Text = null;
                 
                 pictureBox1.Refresh(); 
             }
             else if(temp.MessageID == Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.TEXT))
             {
-                //Message = temp;
-                Log.MessageSent("TEXT");
+                Log.MessageSent("---TEXT---");
                 textBox1.Text = System.Text.Encoding.Default.GetString(temp.Payload);
+                PlayBtn.Enabled = false;
+                pictureBox1.Image = null;
+            }
+
+            else if(temp.MessageID == Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.SOUND))
+            {
+                Log.MessageSent("---SOUND---");
+                File.WriteAllBytes(@"C:\Temp\WriteSound\Temp.wav", temp.Payload);
+                textBox1.Text = @"C:\Temp\WriteSound\Temp.wav";
+                PlayBtn.Enabled = true;
+                pictureBox1.Image = null;
             }
             WriteLog();
         }
@@ -100,16 +130,43 @@ namespace SOME_IP_Server_Client
             tbLog.AppendText(Log.Log_Txt());
             tbLog.ScrollToCaret();
         }
-
-        private void checkSendMessage()
+        private void CheckSendMessage()
         {
-            if(pictureBox1.Image == null)
+            if(cb_Choice.Text=="Text")
             {
-                Message = new SomeIPMessage(Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.TEXT), 0xABAB5555, Convert.ToByte(SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
+                Log.MessageSent("---TEXT---");
+                Message = new SomeIPMessage(Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.TEXT), 0xABAB5555, 
+                    Convert.ToByte(SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
                 byte[] temp = Encoding.ASCII.GetBytes(textBox1.Text);
                 Message.Payload = temp;
+                PlayBtn.Enabled = false;
+            }
+            else if(cb_Choice.Text=="Picture")
+            {
+                Log.MessageSent("---PICTURE---");
+                Message = new SomeIPMessage(Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.PICTURE), 0xABAB5555, 
+                    Convert.ToByte(SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
+                prepareImageMessage(pictureBox1.Image);
+                PlayBtn.Enabled = false;
+            }
+            else if(cb_Choice.Text == "Sound")
+            {
+                pictureBox1.Image = null;
+                Log.MessageSent("---SOUND---");
+                Message = new SomeIPMessage(Convert.ToUInt32(SomeIPMessage.SOMEIP_MessageID.SOUND), 0xABAB5555, 
+                    Convert.ToByte(SomeIPMessage.SOMEIP_MessageType.REQUEST), Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK));
+                prepareSoundMessage();
+            }
+            else
+            {
+                MessageBox.Show("You have not selected what to send!!");
             }
         }
 
+        private void PlayBtn_Click(object sender, EventArgs e)
+        {
+            SoundPlayer Player = new SoundPlayer(textBox1.Text);
+            Player.Play();
+        }
     }
 }

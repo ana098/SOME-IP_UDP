@@ -13,12 +13,6 @@ namespace SOME_IP_Server_Client
         {
              logTxt.AppendLine(text);
         }
-
-        public static void MessageReceived()
-        { 
-        
-        }
-
         public static string Log_Txt()
         {
             return logTxt.ToString();

@@ -19,7 +19,6 @@ namespace SOME_IP_Server_Client
         {
             InitializeComponent();
         }
-
         public int Port
         {
             get { return port; }
@@ -35,7 +34,6 @@ namespace SOME_IP_Server_Client
                 }
             }
         }
-
         public int EndPointPort
         {
             get { return endPointPort; }
@@ -45,17 +43,11 @@ namespace SOME_IP_Server_Client
             }
         }
 
-        private void ConnectDataInput_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void InputDataBtn_Click(object sender, EventArgs e)
         {
             Port = Convert.ToInt32(portTxtBox.Text);
             EndPointPort = Convert.ToInt32(EPtxtBox.Text);
             this.Close();
         }
-
     }
 }
