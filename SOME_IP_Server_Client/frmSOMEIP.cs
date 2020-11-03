@@ -71,6 +71,7 @@ namespace SOME_IP_Server_Client
 
                 Client = new SomeIPClient(Connect_Form.Port, Connect_Form.EndPointPort);
                 Log.MessageSent("Port: " + Connect_Form.Port.ToString()+"  End Point: " + Connect_Form.EndPointPort.ToString());
+
                 Client.ReceiveResultsEvent += checkReceiveMessage;
                 Client.Receive();
         }
@@ -122,6 +123,12 @@ namespace SOME_IP_Server_Client
                 PlayBtn.Enabled = true;
                 pictureBox1.Image = null;
             }
+            else
+            {
+                SomeIPServiceDiscoveryMessage SDtemp = new SomeIPServiceDiscoveryMessage(udpPayload);
+                uint a = SDtemp.GetLength - 3; //pomaknuti računanje payloada ili oduzeti sve sa options da znamo koliko ima. moze i tako pa pomaknuti
+                //kod uzimanja entrya
+            }
             WriteLog();
         }
 
@@ -167,6 +174,27 @@ namespace SOME_IP_Server_Client
         {
             SoundPlayer Player = new SoundPlayer(textBox1.Text);
             Player.Play();
+        }
+
+        private void btn_Publish_Click(object sender, EventArgs e)
+        {
+            SomeIPServiceDiscoveryMessage ServiceDiscovery;
+
+            SomeIPServiceDiscoveryMessage.ServiceDiscoveryEntry Entry = new SomeIPServiceDiscoveryMessage.ServiceDiscoveryEntry();
+            byte[] OptionsArray = new byte[16] { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xD, 0xE, 0xF };
+            byte[] ReservedHeader = new byte[3] { 0x00, 0x00, 0x00 }; //ostavlja se u 0
+            byte[] EntryArray = new byte[] { 0x01, 0x00, 0x00, 0x00, 0xAA, 0xAA, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x14, 0xFF, 0xFF, 0xFF, 0xFF };
+            
+                //  , 0x00, 0x11, 0x00, 0x11 };
+           //Convert.ToByte(0x00110011) };
+           //0x14 je TTL u hex = dekadski 20 sec
+
+            ServiceDiscovery = new SomeIPServiceDiscoveryMessage(0xFFFF8100, 0, Convert.ToByte(SomeIPMessage.SOMEIP_MessageType.NOTIFICATION),
+                Convert.ToByte(SomeIPMessage.SOMEIP_ReturnCode.E_OK), 1, ReservedHeader, EntryArray, OptionsArray);
+            ServiceDiscovery.Payload = ReservedHeader.Concat(EntryArray).Concat(OptionsArray).ToArray();
+
+            Client.Send(ServiceDiscovery.FullMessagePayload);
+
         }
     }
 }

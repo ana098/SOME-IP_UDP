@@ -37,16 +37,20 @@
             this.PlayBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cb_Choice = new System.Windows.Forms.ComboBox();
+            this.btn_Publish = new System.Windows.Forms.Button();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tbLog
             // 
             this.tbLog.Enabled = false;
-            this.tbLog.Location = new System.Drawing.Point(13, 324);
+            this.tbLog.Location = new System.Drawing.Point(14, 437);
             this.tbLog.Margin = new System.Windows.Forms.Padding(4);
             this.tbLog.Name = "tbLog";
-            this.tbLog.Size = new System.Drawing.Size(801, 163);
+            this.tbLog.Size = new System.Drawing.Size(801, 223);
             this.tbLog.TabIndex = 0;
             this.tbLog.Text = "";
             // 
@@ -128,11 +132,50 @@
             this.cb_Choice.Size = new System.Drawing.Size(173, 24);
             this.cb_Choice.TabIndex = 8;
             // 
+            // btn_Publish
+            // 
+            this.btn_Publish.Location = new System.Drawing.Point(533, 213);
+            this.btn_Publish.Name = "btn_Publish";
+            this.btn_Publish.Size = new System.Drawing.Size(124, 29);
+            this.btn_Publish.TabIndex = 9;
+            this.btn_Publish.Text = "Publish";
+            this.btn_Publish.UseVisualStyleBackColor = true;
+            this.btn_Publish.Click += new System.EventHandler(this.btn_Publish_Click);
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(533, 272);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(124, 106);
+            this.checkedListBox1.TabIndex = 10;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(593, 396);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(64, 22);
+            this.textBox2.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(545, 397);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 18);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "TTL:";
+            // 
             // Client_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(827, 500);
+            this.ClientSize = new System.Drawing.Size(827, 673);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.btn_Publish);
             this.Controls.Add(this.cb_Choice);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PlayBtn);
@@ -162,6 +205,10 @@
         private System.Windows.Forms.Button PlayBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cb_Choice;
+        private System.Windows.Forms.Button btn_Publish;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label2;
     }
 }
 

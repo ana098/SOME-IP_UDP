@@ -28,3 +28,14 @@ C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.exe
 C:\Users\anabu\Desktop\Backup - Copy\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.pdb
 C:\Users\anabu\Desktop\SOME_IP_Server_Client\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.ConnectDataInput.resources
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.exe.config
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.exe
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\bin\Debug\SOME_IP_Server_Client.pdb
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csprojAssemblyReference.cache
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.ConnectDataInput.resources
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.Client_Form.resources
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.Properties.Resources.resources
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csproj.GenerateResource.cache
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.csproj.CoreCompileInputs.cache
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.exe
+C:\Users\anabu\Desktop\SOME-IP_UDP-master\SOME_IP_Server_Client\obj\x86\Debug\SOME_IP_Server_Client.pdb
